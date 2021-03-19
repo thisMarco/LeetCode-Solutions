@@ -1,0 +1,72 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        
+        List<Integer> n1List = Arrays.stream(nums1).boxed().collect(Collectors.toList());
+        List<Integer> n2List = Arrays.stream(nums2).boxed().collect(Collectors.toList());
+        
+        //int i = 0;
+        //int j = 0;
+        int k = 0;
+        int median = 0;
+        int med = ((n1List.size() + n2List.size())/2);
+        boolean even = ((n1List.size() + n2List.size()) % 2 == 0);
+        int added = 0;
+        
+        //System.out.println("N+M: " + (n+m));
+        //System.out.println("Median before: " + med);
+        
+        if (even)
+            med = med -1;
+        
+         //System.out.println("M: " + n1List.size());
+         //System.out.println("N: " + n2List.size());
+         //System.out.println("Median: " + med);
+         //System.out.println("Is Even: " + even);
+        
+        while(true) {
+            boolean smaller;
+            if(n1List.size() > 0 && n2List.size() > 0)
+                smaller = n1List.get(0) < n2List.get(0);
+            else if (n1List.size() > 0)
+                smaller = true;
+            else
+                smaller = false;
+            //System.out.println("K: " + k);
+            if (k < med){
+                
+                if (smaller) {
+                 n1List.remove(0);
+                }
+                else
+                 n2List.remove(0);
+                
+            } else if (k == med && !even) {
+                if (smaller)
+                    return n1List.get(0);
+                else
+                    return n2List.get(0);
+            } else {
+                
+                if (smaller) {
+                    median += n1List.get(0);
+                    n1List.remove(0);
+                }             
+                else {
+                    median += n2List.get(0);
+                    n2List.remove(0);
+                }
+                    
+                added++;
+                
+                //System.out.println("Median: " + median);
+                
+                if (added > 1)
+                    return (double) median/2;
+            }
+            
+            k++;
+            
+        }
+        
+    }
+}
