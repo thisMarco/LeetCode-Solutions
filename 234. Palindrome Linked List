@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    
+    ArrayList<Integer> nodesValues = new ArrayList<Integer>();
+    Median m = new Median();
+    
+    public boolean isPalindrome(ListNode head) {
+        
+        if (head.next == null) return true;
+        
+        ListNode nextNode = head.next;
+        
+        LoadNextNode(head.next, 1);
+        
+        nextNode = head;
+        for(int value : nodesValues) {
+            
+            if (nextNode.val == value)
+                nextNode = nextNode.next;
+            else
+                return false;
+        }
+        
+        return true;
+        
+    }
+    
+    private void LoadNextNode(ListNode nextNode, int n) {
+        
+        if (nextNode.next != null)
+                LoadNextNode(nextNode.next, n++);
+        else
+            m.median = n/2;
+        
+        if (n > m.median)
+                nodesValues.add(nextNode.val);
+    }
+}
+
+ public class Median {
+                        
+        int median;
+    }
