@@ -1,0 +1,25 @@
+/*
+  Write a function that reverses a string. The input string is given as an array of characters s.
+
+  Example 1:
+
+  Input: s = ["h","e","l","l","o"]
+  Output: ["o","l","l","e","h"]
+*/
+
+class Solution {
+    fun reverseString(s: CharArray): Unit {
+        
+        var l: Int = 0;
+        var r: Int = s.lastIndex;
+        
+        while(l < r) {
+            var t: Char = s.get(l);
+            s.set(l, s.get(r));
+            s.set(r, t);
+            
+            ++l;
+            --r;
+        }
+    }
+}
