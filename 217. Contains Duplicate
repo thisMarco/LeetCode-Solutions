@@ -1,0 +1,21 @@
+/*
+  Given an integer array nums, return true if any value appears at least twice in the array,
+  and return false if every element is distinct.
+*/
+
+class Solution {
+    fun containsDuplicate(nums: IntArray): Boolean {
+        
+        var i: Int = 0;
+        for(n in nums) {
+            var arrCopy: IntArray = nums.copyOfRange(i+1, nums.lastIndex+1);
+            //println(Arrays.toString(arrCopy));
+            if (arrCopy.contains(n))
+                return true;
+            ++i;
+        }
+        
+        return false;
+        
+    }
+}
